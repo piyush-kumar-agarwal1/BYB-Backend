@@ -44,4 +44,10 @@ app.get('/health', (req, res) => {
 // Error handling middleware
 app.use(errorHandler);
 
+// For serverless environments like Vercel
+if (process.env.NODE_ENV === 'production') {
+  // Make sure we handle OPTIONS requests properly for CORS
+  app.options('*', cors());
+}
+
 export default app;
