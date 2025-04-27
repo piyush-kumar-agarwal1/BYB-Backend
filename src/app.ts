@@ -15,7 +15,12 @@ app.use(cookieParser());
 // Updated CORS configuration to allow multiple origins
 app.use(cors({
   origin: function(origin, callback) {
-    const allowedOrigins = ['http://localhost:5173', 'http://localhost:8081'];
+    const allowedOrigins = [
+      'https://break-your-boredom.vercel.app/',  // Add your deployed frontend URL
+      'http://localhost:5173', 
+      'http://localhost:8080',
+      'http://localhost:8081'
+    ];
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
     if (allowedOrigins.indexOf(origin) === -1) {
