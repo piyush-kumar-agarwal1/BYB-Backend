@@ -43,6 +43,9 @@ app.use(cors({
   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
 }));
 
+// Add this before your routes
+app.options('*', cors());
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
