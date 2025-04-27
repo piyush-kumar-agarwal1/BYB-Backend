@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(cors({
   origin: function(origin, callback) {
     const allowedOrigins = [
-      'https://break-your-boredom.vercel.app/',  // Add your deployed frontend URL
+      'https://break-your-boredom.vercel.app',  // Add your deployed frontend URL
       'http://localhost:5173', 
       'http://localhost:8080',
       'http://localhost:8081'

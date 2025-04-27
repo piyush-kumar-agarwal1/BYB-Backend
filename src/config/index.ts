@@ -10,6 +10,6 @@ export default {
   NODE_ENV: process.env.NODE_ENV || 'development',
   CLIENT_URL: process.env.CLIENT_URL || 
     (process.env.NODE_ENV === 'production' 
-      ? 'https://break-your-boredom.vercel.app/' 
+      ? 'https://break-your-boredom.vercel.app' 
       : 'http://localhost:5173')
 };
