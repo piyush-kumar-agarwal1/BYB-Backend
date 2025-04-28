@@ -3,6 +3,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import authRoutes from './routes/authRoutes';
 import userRoutes from './routes/userRoutes';
+import proxyRoutes from './routes/proxyRoutes';
 import errorHandler from './middleware/errorHandler';
 import config from './config';
 
@@ -92,6 +93,7 @@ app.post('/user/ratings', (req, res) => {
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/proxy', proxyRoutes);
 
 // Health check route
 app.get('/health', (req, res) => {
