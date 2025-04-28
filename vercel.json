@@ -2,10 +2,6 @@
   "version": 2,
   "builds": [
     {
-      "src": "dist/server.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "api/**/*.js",
       "use": "@vercel/node"
     }
@@ -13,7 +9,13 @@
   "routes": [
     {
       "src": "/api/auth/login",
+      "methods": ["OPTIONS", "POST"],
       "dest": "/api/auth/login.js"
+    },
+    {
+      "src": "/api/auth/register",
+      "methods": ["OPTIONS", "POST"],
+      "dest": "/api/auth/register.js"
     },
     {
       "src": "/api/auth/(.*)",
@@ -39,7 +41,8 @@
         { "key": "Access-Control-Allow-Origin", "value": "https://break-your-boredom.vercel.app" },
         { "key": "Access-Control-Allow-Methods", "value": "GET, POST, PUT, DELETE, OPTIONS" },
         { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization, X-Requested-With, Accept, Origin" },
-        { "key": "Access-Control-Allow-Credentials", "value": "true" }
+        { "key": "Access-Control-Allow-Credentials", "value": "true" },
+        { "key": "Access-Control-Max-Age", "value": "86400" }
       ]
     }
   ]
