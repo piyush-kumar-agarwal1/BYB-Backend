@@ -67,6 +67,56 @@ router.get('/movies/search', async (req, res) => {
   }
 });
 
+// Add these new endpoint handlers
+
+// Movie details endpoint
+router.get('/movies/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await tmdbClient.get(`/movie/${id}`);
+    res.json(response.data);
+  } catch (error) {
+    console.error('Proxy error:', error);
+    const axiosError = error as AxiosError;
+    res.status(axiosError.response?.status || 500).json({
+      success: false,
+      message: axiosError instanceof Error ? axiosError.message : 'Unknown error'
+    });
+  }
+});
+
+// Movie watch providers endpoint
+router.get('/movies/:id/watch/providers', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await tmdbClient.get(`/movie/${id}/watch/providers`);
+    res.json(response.data);
+  } catch (error) {
+    console.error('Proxy error:', error);
+    const axiosError = error as AxiosError;
+    res.status(axiosError.response?.status || 500).json({
+      success: false,
+      message: axiosError instanceof Error ? axiosError.message : 'Unknown error'
+    });
+  }
+});
+
+// Similar movies endpoint
+router.get('/movies/:id/similar', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await tmdbClient.get(`/movie/${id}/similar`);
+    res.json(response.data);
+  } catch (error) {
+    console.error('Proxy error:', error);
+    const axiosError = error as AxiosError;
+    res.status(axiosError.response?.status || 500).json({
+      success: false,
+      message: axiosError instanceof Error ? axiosError.message : 'Unknown error'
+    });
+  }
+});
+
 // TMDB TV/Series routes
 router.get('/series/popular', async (req, res) => {
   try {
@@ -81,6 +131,38 @@ router.get('/series/popular', async (req, res) => {
     };
     
     const response = await tmdbClient.get('/discover/tv', { params });
+    res.json(response.data);
+  } catch (error) {
+    console.error('Proxy error:', error);
+    const axiosError = error as AxiosError;
+    res.status(axiosError.response?.status || 500).json({
+      success: false,
+      message: axiosError instanceof Error ? axiosError.message : 'Unknown error'
+    });
+  }
+});
+
+// Series details endpoint
+router.get('/series/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await tmdbClient.get(`/tv/${id}`);
+    res.json(response.data);
+  } catch (error) {
+    console.error('Proxy error:', error);
+    const axiosError = error as AxiosError;
+    res.status(axiosError.response?.status || 500).json({
+      success: false,
+      message: axiosError instanceof Error ? axiosError.message : 'Unknown error'
+    });
+  }
+});
+
+// Similar series endpoint
+router.get('/series/:id/similar', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await tmdbClient.get(`/tv/${id}/similar`);
     res.json(response.data);
   } catch (error) {
     console.error('Proxy error:', error);
@@ -123,6 +205,22 @@ router.get('/books/search', async (req, res) => {
         maxResults: 20
       }
     });
+    res.json(response.data);
+  } catch (error) {
+    console.error('Proxy error:', error);
+    const axiosError = error as AxiosError;
+    res.status(axiosError.response?.status || 500).json({
+      success: false,
+      message: axiosError instanceof Error ? axiosError.message : 'Unknown error'
+    });
+  }
+});
+
+// Book details endpoint
+router.get('/books/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await booksClient.get(`/volumes/${id}`);
     res.json(response.data);
   } catch (error) {
     console.error('Proxy error:', error);
