@@ -44,6 +44,51 @@ app.get('/me', (req, res) => {
   app._router.handle(req, res);
 });
 
+// Add redirects for user endpoints without /api prefix
+
+// User watchlist endpoints
+app.get('/user/watchlist', (req, res) => {
+  req.url = '/api/user/watchlist';
+  app._router.handle(req, res);
+});
+
+app.post('/user/watchlist', (req, res) => {
+  req.url = '/api/user/watchlist';
+  app._router.handle(req, res);
+});
+
+app.delete('/user/watchlist/:itemType/:itemId', (req, res) => {
+  req.url = `/api/user/watchlist/${req.params.itemType}/${req.params.itemId}`;
+  app._router.handle(req, res);
+});
+
+// User watched endpoints
+app.get('/user/watched', (req, res) => {
+  req.url = '/api/user/watched';
+  app._router.handle(req, res);
+});
+
+app.post('/user/watched', (req, res) => {
+  req.url = '/api/user/watched';
+  app._router.handle(req, res);
+});
+
+app.delete('/user/watched/:itemType/:itemId', (req, res) => {
+  req.url = `/api/user/watched/${req.params.itemType}/${req.params.itemId}`;
+  app._router.handle(req, res);
+});
+
+// User ratings endpoints
+app.get('/user/ratings', (req, res) => {
+  req.url = '/api/user/ratings';
+  app._router.handle(req, res);
+});
+
+app.post('/user/ratings', (req, res) => {
+  req.url = '/api/user/ratings';
+  app._router.handle(req, res);
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
