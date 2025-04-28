@@ -2,33 +2,11 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/**/*.js",
+      "src": "api/index.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
-    {
-      "src": "/api/auth/login",
-      "methods": ["OPTIONS", "POST"],
-      "dest": "/api/auth/login.js"
-    },
-    {
-      "src": "/api/auth/register",
-      "methods": ["OPTIONS", "POST"],
-      "dest": "/api/auth/register.js"
-    },
-    {
-      "src": "/api/auth/(.*)",
-      "dest": "/api/auth/[...slug].js"
-    },
-    {
-      "src": "/api/user/(.*)",
-      "dest": "/api/user/[...slug].js"
-    },
-    {
-      "src": "/health",
-      "dest": "/api/health.js"
-    },
     {
       "src": "/api/(.*)",
       "dest": "/api/index.js"
