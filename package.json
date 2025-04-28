@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/server.js",
     "build": "tsc",
-    "dev": "nodemon --exec ts-node src/server.ts"
+    "dev": "ts-node src/server.ts"
   },
   "dependencies": {
     "@types/cookie-parser": "^1.4.8",
