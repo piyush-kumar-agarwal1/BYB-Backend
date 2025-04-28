@@ -1,4 +1,10 @@
-const app = require('../dist/app').default;
+// Import the app directly from the path where Vercel will build it
+let app;
+try {
+    app = require('../dist/app').default;
+} catch (e) {
+    console.error('Failed to load app module:', e);
+}
 
 module.exports = async (req, res) => {
     // Set CORS headers - allow the specific frontend domain
@@ -20,12 +26,19 @@ module.exports = async (req, res) => {
     }
 
     try {
+        if (!app) {
+            throw new Error('Express app failed to load');
+        }
         // Forward other requests to Express app
         return app(req, res);
     } catch (error) {
         console.error('API error:', error);
         res.statusCode = 500;
         res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify({ success: false, message: 'Server error' }));
+        res.end(JSON.stringify({
+            success: false,
+            message: 'Server error',
+            error: error.message
+        }));
     }
 };
