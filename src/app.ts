@@ -14,7 +14,7 @@ app.use(cookieParser());
 
 // Simplified CORS configuration for Vercel
 app.use(cors({
-  origin: ['https://break-your-boredom.vercel.app', 'http://localhost:5173', 'http://localhost:8080', 'http://localhost:8081'],
+  origin: ['https://break-your-boredom.vercel.app', 'http://localhost:5173', 'http://localhost:8080'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
