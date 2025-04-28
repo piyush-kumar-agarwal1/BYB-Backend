@@ -8,14 +8,24 @@ module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.setHeader('Access-Control-Max-Age', '86400'); // 24 hours
 
-    // Handle preflight OPTIONS request
+    // Handle preflight OPTIONS request more explicitly
     if (req.method === 'OPTIONS') {
-        // Preflight requests need a 204 No Content response
-        res.statusCode = 204;
+        // Set status code to 200 instead of 204 for wider compatibility
+        res.statusCode = 200;
+        // Ensure all headers are properly set for OPTIONS
+        res.setHeader('Content-Length', '0');
+        res.setHeader('Content-Type', 'text/plain');
         res.end();
         return;
     }
 
-    // Forward other requests to Express app
-    return app(req, res);
+    try {
+        // Forward other requests to Express app
+        return app(req, res);
+    } catch (error) {
+        console.error('API error:', error);
+        res.statusCode = 500;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ success: false, message: 'Server error' }));
+    }
 };
