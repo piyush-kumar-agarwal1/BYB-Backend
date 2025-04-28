@@ -23,6 +23,27 @@ app.use(cors({
 // Handle preflight requests for all routes
 app.options('*', cors());
 
+// Add redirects for auth endpoints without /api prefix
+app.post('/login', (req, res) => {
+  req.url = '/api/auth/login';
+  app._router.handle(req, res);
+});
+
+app.post('/register', (req, res) => {
+  req.url = '/api/auth/register';
+  app._router.handle(req, res);
+});
+
+app.post('/logout', (req, res) => {
+  req.url = '/api/auth/logout';
+  app._router.handle(req, res);
+});
+
+app.get('/me', (req, res) => {
+  req.url = '/api/auth/me';
+  app._router.handle(req, res);
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
