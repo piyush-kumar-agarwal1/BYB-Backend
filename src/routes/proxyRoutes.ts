@@ -1,5 +1,5 @@
 import express from 'express';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios'; // Import AxiosError type
 import { protect } from '../middleware/auth';
 
 const router = express.Router();
@@ -39,9 +39,10 @@ router.get('/movies/popular', async (req, res) => {
     res.json(response.data);
   } catch (error) {
     console.error('Proxy error:', error);
-    res.status(error.response?.status || 500).json({
+    const axiosError = error as AxiosError;
+    res.status(axiosError.response?.status || 500).json({
       success: false,
-      message: error.message
+      message: axiosError instanceof Error ? axiosError.message : 'Unknown error'
     });
   }
 });
@@ -58,9 +59,10 @@ router.get('/movies/search', async (req, res) => {
     res.json(response.data);
   } catch (error) {
     console.error('Proxy error:', error);
-    res.status(error.response?.status || 500).json({
+    const axiosError = error as AxiosError;
+    res.status(axiosError.response?.status || 500).json({
       success: false,
-      message: error.message
+      message: axiosError instanceof Error ? axiosError.message : 'Unknown error'
     });
   }
 });
@@ -82,9 +84,10 @@ router.get('/series/popular', async (req, res) => {
     res.json(response.data);
   } catch (error) {
     console.error('Proxy error:', error);
-    res.status(error.response?.status || 500).json({
+    const axiosError = error as AxiosError;
+    res.status(axiosError.response?.status || 500).json({
       success: false,
-      message: error.message
+      message: axiosError instanceof Error ? axiosError.message : 'Unknown error'
     });
   }
 });
@@ -102,9 +105,10 @@ router.get('/books/popular', async (req, res) => {
     res.json(response.data);
   } catch (error) {
     console.error('Proxy error:', error);
-    res.status(error.response?.status || 500).json({
+    const axiosError = error as AxiosError;
+    res.status(axiosError.response?.status || 500).json({
       success: false,
-      message: error.message
+      message: axiosError instanceof Error ? axiosError.message : 'Unknown error'
     });
   }
 });
@@ -122,9 +126,10 @@ router.get('/books/search', async (req, res) => {
     res.json(response.data);
   } catch (error) {
     console.error('Proxy error:', error);
-    res.status(error.response?.status || 500).json({
+    const axiosError = error as AxiosError;
+    res.status(axiosError.response?.status || 500).json({
       success: false,
-      message: error.message
+      message: axiosError instanceof Error ? axiosError.message : 'Unknown error'
     });
   }
 });
@@ -136,9 +141,10 @@ router.get('/anime/popular', async (req, res) => {
     res.json(response.data);
   } catch (error) {
     console.error('Proxy error:', error);
-    res.status(error.response?.status || 500).json({
+    const axiosError = error as AxiosError;
+    res.status(axiosError.response?.status || 500).json({
       success: false,
-      message: error.message
+      message: axiosError instanceof Error ? axiosError.message : 'Unknown error'
     });
   }
 });
@@ -152,9 +158,10 @@ router.get('/anime/search', async (req, res) => {
     res.json(response.data);
   } catch (error) {
     console.error('Proxy error:', error);
-    res.status(error.response?.status || 500).json({
+    const axiosError = error as AxiosError;
+    res.status(axiosError.response?.status || 500).json({
       success: false,
-      message: error.message
+      message: axiosError instanceof Error ? axiosError.message : 'Unknown error'
     });
   }
 });
